@@ -1,0 +1,43 @@
+syntax = "proto2";
+
+package perfetto.protos;
+
+message FtraceConfig {
+    repeated string ftrace_events = 1;
+    repeated string atrace_categories = 2;
+    repeated string atrace_apps = 3;
+    optional uint32 buffer_size_kb = 10;
+    optional uint32 drain_period_ms = 11;
+    
+    optional CompactSchedConfig compact_sched = 12;
+    message CompactSchedConfig {
+        optional bool enabled = 1;
+    }
+    
+    optional PrintFilter print_filter = 22;
+    message PrintFilter {
+        repeated Rule rules = 1;
+        message Rule {
+            optional string prefix = 1;
+            optional bool allow = 2;
+        }
+    }
+    
+    optional bool symbolize_ksyms = 13;
+    
+    optional KsymsMemPolicy ksyms_mem_policy = 17;
+    enum KsymsMemPolicy {
+        KSYMS_UNSPECIFIED = 0;
+        KSYMS_CLEANUP_ON_STOP = 1;
+        KSYMS_RETAIN = 2;
+    }
+    
+    optional bool initialize_ksyms_synchronously_for_testing = 14 [deprecated = true];
+    optional bool throttle_rss_stat = 15;
+    optional bool disable_generic_events = 16;
+    repeated string syscall_events = 18;
+    optional bool enable_function_graph = 19;
+    repeated string function_filters = 20;
+    repeated string function_graph_roots = 21;
+    optional bool preserve_ftrace_buffer = 23;
+}

@@ -68,6 +68,7 @@ message CatalogIds {
     string slug = 6;
     string achievementSetId = 7;
     repeated string masterTitleIds = 8;
+    string baseGameSlug = 9;
 }
 
 message BuildMetadata {
@@ -416,6 +417,17 @@ message ContentControlReq {
 }
 
 message ContentControlResp {
+    
+}
+
+message ContentUninstallReq {
+    string slug = 1;
+    string offerId = 2;
+    bool silent = 3;
+    RequestData requestData = 4;
+}
+
+message ContentUninstallResp {
     
 }
 
