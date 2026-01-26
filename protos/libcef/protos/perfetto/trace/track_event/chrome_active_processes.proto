@@ -1,7 +1,0 @@
-syntax = "proto2";
-
-package perfetto.protos;
-
-message ChromeActiveProcesses {
-    repeated int32 pid = 1;
-}

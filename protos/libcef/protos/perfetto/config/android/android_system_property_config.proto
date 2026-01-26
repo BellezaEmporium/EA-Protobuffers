@@ -1,8 +1,0 @@
-syntax = "proto2";
-
-package perfetto.protos;
-
-message AndroidSystemPropertyConfig {
-    optional uint32 poll_ms = 1;
-    repeated string property_name = 2;
-}
