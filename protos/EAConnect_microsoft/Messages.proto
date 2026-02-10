@@ -51,6 +51,7 @@ message ContentInstallInfo {
     }
     
     string executablePath = 17;
+    repeated string dependentSoftwares = 18;
     
     message Launcher {
         string exePath = 1;
@@ -756,6 +757,12 @@ message ExternalUserInfo {
     string userId = 5;
 }
 
+message GameInvite {
+    string payload = 1;
+    uint64 fromUserId = 2;
+    bool initial = 3;
+}
+
 message ExternalAction {
     uint32 type = 1;
     ExternalUserInfo userInfo = 2;
@@ -770,7 +777,7 @@ message ExternalAction {
     string trackingId = 13;
     string cookieToInject = 14;
     string clientPage = 15;
-    string gameInvite = 16;
+    GameInvite gameInvite = 16;
 }
 
 message PushExternalActionReq {
@@ -994,7 +1001,8 @@ message Link2EAReq {
     string cmdParams = 4;
     string launchHelperArgument = 5;
     string platformType = 6;
-    string gameInvite = 7;
+    GameInvite gameInvite = 7;
+    string cookieToInject = 8;
 }
 
 message Link2EAResp {
