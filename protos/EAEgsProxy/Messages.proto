@@ -609,10 +609,6 @@ message InstallQueueUpdatedNotif {
     string data = 2;
 }
 
-message ExternalActionNotif {
-    
-}
-
 message UpdaterDownloadProgNotif {
     int64 bytesReceived = 1;
     int64 bytesTotal = 2;
@@ -753,8 +749,9 @@ message InstallStatusInfoResp {
 
 message ExternalUserInfo {
     string authCode = 1;
+    string idToken = 2;
+    string userId = 3;
     bool shouldRefreshSPA = 4;
-    string userId = 5;
 }
 
 message GameInvite {
@@ -793,8 +790,11 @@ message PopExternalActionReq {
 }
 
 message PopExternalActionResp {
-    ExternalAction externalAction = 1;
-    bool moreActions = 2;
+    repeated ExternalAction externalActions = 1;
+}
+
+message ExternalActionNotif {
+    
 }
 
 message CancelInstallGameReq {
