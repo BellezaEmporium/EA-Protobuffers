@@ -25,9 +25,9 @@ bucket = bucket_response.json()
 
 recommended_version = bucket['recommended']['version']
 
-#if recommended_version == current_version:
-#    print("Already at the recommended version.")
-#    exit(0)
+if recommended_version == current_version:
+    print("Already at the recommended version.")
+    exit(0)
 
 version_response = session.get(version_url(recommended_version))
 version_manifest = version_response.json()
