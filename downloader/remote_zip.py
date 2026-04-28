@@ -10,6 +10,9 @@ LOCAL_FILE_HEADER = b"\x50\x4b\x03\x04"
 ZIP_64_END_OF_CD_LOCATOR = b"\x50\x4b\x06\x07"
 ZIP_64_END_OF_CD = b"\x50\x4b\x06\x06"
 
+# EOCD (22 bytes) + max ZIP comment (65535 bytes)
+MAX_EOCD_SEARCH = 22 + 0xFFFF
+
 class LocalFile:
     def __init__(self) -> None:
         self.relative_local_file_offset: int
@@ -332,20 +335,31 @@ class RemoteZip:
         self.__find_central_directory()
 
     def __find_end_of_cd(self):
+        tail_size = min(self.file_size, MAX_EOCD_SEARCH)
+        tail_offset = self.file_size - tail_size
         end_of_cd_data = self.get_bytes_from_file(
-            from_b=self.file_size - 100, add_archive_index=False
+            from_b=tail_offset, size=tail_size, add_archive_index=False
         )
 
-        end_of_cd_header_data_index = end_of_cd_data.find(END_OF_CENTRAL_DIRECTORY)
-        zip64_end_of_cd_locator_index = end_of_cd_data.find(ZIP_64_END_OF_CD_LOCATOR)
-        assert end_of_cd_header_data_index != -1
+        end_of_cd_header_data_index = end_of_cd_data.rfind(END_OF_CENTRAL_DIRECTORY)
+        if end_of_cd_header_data_index == -1:
+            raise ValueError("Could not locate End of Central Directory record in ZIP tail")
+
+        zip64_end_of_cd_locator_index = end_of_cd_data.rfind(
+            ZIP_64_END_OF_CD_LOCATOR, 0, end_of_cd_header_data_index
+        )
         end_of_cd = EndOfCentralDir.from_bytes(end_of_cd_data[end_of_cd_header_data_index:])
         if end_of_cd.central_directory_offset == 0xFFFFFFFF:
-            assert zip64_end_of_cd_locator_index != -1
+            if zip64_end_of_cd_locator_index == -1:
+                raise ValueError("Could not locate ZIP64 End of Central Directory locator")
             # We need to find zip64 headers
 
-            zip64_end_of_cd_locator = Zip64EndOfCentralDirLocator.from_bytes(end_of_cd_data[zip64_end_of_cd_locator_index:])
-            zip64_end_of_cd_data = self.get_bytes_from_file(from_b=zip64_end_of_cd_locator.zip64_end_of_cd_offset, size=200)
+            zip64_end_of_cd_locator = Zip64EndOfCentralDirLocator.from_bytes(
+                end_of_cd_data[zip64_end_of_cd_locator_index:]
+            )
+            zip64_end_of_cd_data = self.get_bytes_from_file(
+                from_b=zip64_end_of_cd_locator.zip64_end_of_cd_offset, size=200
+            )
             zip64_end_of_cd = Zip64EndOfCentralDir.from_bytes(zip64_end_of_cd_data)
 
             self.central_directory_offset = zip64_end_of_cd.central_directory_offset

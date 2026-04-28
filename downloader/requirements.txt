@@ -1,0 +1,3 @@
+requests
+protobuf==3.20.3
+pbtk==1.0.8
