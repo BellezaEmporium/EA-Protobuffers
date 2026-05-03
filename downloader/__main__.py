@@ -81,18 +81,17 @@ for exe in os.listdir('temp'):
         output_dir = 'extracted_protos/' + exe.split('.')[0]
 
         env = os.environ.copy()
-        env['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
 
         if pbtk_from_binary_cmd:
             subprocess.run(
                 [pbtk_from_binary_cmd, file_location, output_dir],
-                check=True,
+                check=False,
                 env=env
             )
         else:
             subprocess.run(
                 [sys.executable, '-m', 'pbtk.extractors.from_binary', file_location, output_dir],
-                check=True,
+                check=False,
                 env=env
             )
 
