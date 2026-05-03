@@ -1002,6 +1002,7 @@ message Link2EAReq {
     string platformType = 6;
     GameInvite gameInvite = 7;
     string cookieToInject = 8;
+    bool isUserInvisible = 9;
 }
 
 message Link2EAResp {
