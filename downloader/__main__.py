@@ -73,6 +73,21 @@ def flatten_proto_files(root_folder: str) -> None:
 
 os.makedirs('extracted_protos', exist_ok=True)
 
+# Patch pbtk to ignore UnicodeDecodeError
+try:
+    import pbtk.extractors.from_binary
+    pbtk_file = pbtk.extractors.from_binary.__file__
+    with open(pbtk_file, 'r') as f:
+        pbtk_code = f.read()
+    
+    old_code = "        proto = FileDescriptorProto()\n        proto.ParseFromString(binr[start:cursor])"
+    new_code = "        proto = FileDescriptorProto()\n        try:\n            proto.ParseFromString(binr[start:cursor])\n        except Exception:\n            continue"
+    if old_code in pbtk_code:
+        with open(pbtk_file, 'w') as f:
+            f.write(pbtk_code.replace(old_code, new_code))
+except Exception as e:
+    print("Could not patch pbtk:", e)
+
 pbtk_from_binary_cmd = shutil.which('pbtk-from-binary')
 
 for exe in os.listdir('temp'):
