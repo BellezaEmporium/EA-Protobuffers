@@ -1,0 +1,30 @@
+name: Update definitions
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 20 * * 1-5'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest  
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+      - run: pip install -r downloader/requirements.txt
+      - name: Run downloader
+        run: python .
+        working-directory: downloader
+      - name: Push new content
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protos downloader/curr_version.txt
+          git commit -m "$(cat downloader/curr_version.txt)" && git push
+        continue-on-error: true

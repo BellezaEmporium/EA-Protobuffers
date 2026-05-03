@@ -596,10 +596,6 @@ message GameResumedNotif {
     GameRunStatus gameRunStatus = 1;
 }
 
-message GameRunStatusNotif {
-    GameRunStatus gameRunStatus = 1;
-}
-
 message ChangeSplashVisibilityNotif {
     uint32 type = 1;
     uint32 reason = 2;
@@ -752,6 +748,8 @@ message ExternalUserInfo {
     string idToken = 2;
     string userId = 3;
     bool shouldRefreshSPA = 4;
+    string platformToken = 5;
+    string platformUserId = 6;
 }
 
 message GameInvite {
@@ -775,6 +773,7 @@ message ExternalAction {
     string cookieToInject = 14;
     string clientPage = 15;
     GameInvite gameInvite = 16;
+    bool isUserInvisible = 17;
 }
 
 message PushExternalActionReq {
