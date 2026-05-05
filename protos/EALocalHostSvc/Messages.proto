@@ -1011,6 +1011,7 @@ message Link2EAResp {
 
 message Link2EAPendingRequest {
     string launchHelperArgument = 1;
+    RequestData requestData = 2;
 }
 
 message Link2EAPendingRequestResp {
