@@ -193,6 +193,7 @@ message GameRunStatus {
     uint32 processId = 6;
     uint32 threadId = 7;
     int32 exitCode = 8;
+    uint32 requestSource = 9;
 }
 
 message GepGameEnvironmentData {
@@ -579,13 +580,11 @@ message ContentUpdatedNotif {
 }
 
 message InstallUpdatedNotif {
-    repeated OfferKey offerKeys = 1;
-    repeated ContentInstallInfo installInfos = 2;
-    repeated string softwareIds = 3;
+    reserved 1, 2, 3;
 }
 
 message BaseGameUpdatedNotif {
-    repeated ContentInstallInfo installInfos = 1;
+    reserved 1;
 }
 
 message GameStartedSuspendedNotif {
@@ -620,12 +619,7 @@ message UpdateNotif {
 }
 
 message ModifyContentProgressNotif {
-    string offerId = 1;
-    string slug = 2;
-    uint64 numerator = 5;
-    uint64 denominator = 6;
-    float bandwidthBps = 7;
-    int32 step = 9;
+    reserved 1, 2, 5, 6, 7, 9;
 }
 
 message InsertDiskNotif {
@@ -774,6 +768,7 @@ message ExternalAction {
     string clientPage = 15;
     GameInvite gameInvite = 16;
     bool isUserInvisible = 17;
+    string protocolUrl = 18;
 }
 
 message PushExternalActionReq {
