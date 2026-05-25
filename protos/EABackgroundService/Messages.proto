@@ -767,8 +767,8 @@ message ExternalAction {
     string cookieToInject = 14;
     string clientPage = 15;
     GameInvite gameInvite = 16;
-    bool isUserInvisible = 17;
     string protocolUrl = 18;
+    uint32 thirdPartyPresence = 19;
 }
 
 message PushExternalActionReq {
@@ -997,7 +997,7 @@ message Link2EAReq {
     string platformType = 6;
     GameInvite gameInvite = 7;
     string cookieToInject = 8;
-    bool isUserInvisible = 9;
+    uint32 thirdPartyPresence = 10;
 }
 
 message Link2EAResp {
