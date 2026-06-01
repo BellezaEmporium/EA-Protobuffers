@@ -769,6 +769,7 @@ message ExternalAction {
     GameInvite gameInvite = 16;
     string protocolUrl = 18;
     uint32 thirdPartyPresence = 19;
+    bool isLauncherElevated = 20;
 }
 
 message PushExternalActionReq {
