@@ -219,36 +219,12 @@ message GepGameEnvironmentData {
     uint32 egsProxyIpcPort = 20;
 }
 
-message ClientAutoUpdateValuesUpdatedReq {
-    bool automaticClientUpdatesEnabled = 1;
-}
-
-message ClientAutoUpdateValuesUpdatedResp {
-    
-}
-
-message CrashBgsReq {
-    
-}
-
-message CrashBgsResp {
-    
-}
-
 message CheckClientRunningReq {
     bool rtpLaunchPending = 1;
 }
 
 message CheckClientRunningResp {
     bool running = 1;
-}
-
-message CheckAuthViewVisibilityReq {
-    
-}
-
-message CheckAuthViewVisibilityResp {
-    
 }
 
 message CheckUpdateInformationReq {
@@ -269,35 +245,11 @@ message CheckVersionResp {
     string environment = 3;
 }
 
-message NotifyProcessIdReq {
-    uint32 processId = 1;
-}
-
-message NotifyProcessIdResp {
-    
-}
-
-message NotifyLsxPortReq {
-    uint32 lsxPort = 1;
-}
-
-message NotifyLsxPortResp {
-    
-}
-
 message AcceptUpdateReq {
     
 }
 
 message AcceptUpdateResp {
-    
-}
-
-message PauseUpdateReq {
-    
-}
-
-message PauseUpdateResp {
     
 }
 
@@ -309,85 +261,7 @@ message BeginUpdateResp {
     int32 result = 1;
 }
 
-message SimulateNoNetworkReq {
-    bool disableNetwork = 1;
-}
-
-message SimulateNoNetworkResp {
-    
-}
-
-message ManualOfflineStatusChangedReq {
-    bool goOffline = 1;
-}
-
-message ManualOfflineStatusChangedResp {
-    
-}
-
-message RefreshAuthNotif {
-    
-}
-
-message InstallConfigUpdatedReq {
-    bool automaticContentUpdates = 1;
-    bool continuedContentInstalls = 2;
-    int64 throttleBandwidthKbPerSecond = 3;
-    bool pauseDownloadsWhenInGame = 4;
-}
-
-message InstallConfigUpdatedResp {
-    
-}
-
 message GetCatalogStoreReq {
-    
-}
-
-message GetCatalogStoreResp {
-    
-}
-
-message CatalogUpdatedNotif {
-    string serializedContent = 1;
-}
-
-message RefreshInstallStateReq {
-    repeated string softwareIds = 1;
-}
-
-message RefreshInstallStateResp {
-    
-}
-
-message RefreshInstallStateCompletedNotif {
-    repeated string softwareIds = 1;
-    bool installStateChanged = 2;
-}
-
-message InstallContentReq {
-    string data = 10;
-}
-
-message InstallContentResp {
-    
-}
-
-message RefreshInstallLocaleReq {
-    repeated string softwareIds = 1;
-}
-
-message RefreshInstallLocaleResp {
-    
-}
-
-message ContentControlReq {
-    uint32 contentControlType = 1;
-    repeated string offerIds = 2;
-    string slug = 3;
-}
-
-message ContentControlResp {
     
 }
 
@@ -397,10 +271,6 @@ message ContentUninstallReq {
     bool silent = 3;
     RequestData requestData = 4;
     bool skipgameisrunningcheck = 5;
-}
-
-message ContentUninstallResp {
-    
 }
 
 message DetectedBundle {
@@ -426,42 +296,6 @@ message VerifyDetectedBundlesReq {
     repeated DetectedBundle detectedBundles = 1;
 }
 
-message VerifyDetectedBundlesResp {
-    
-}
-
-message UpdateContentReq {
-    string data = 5;
-}
-
-message UpdateContentResp {
-    
-}
-
-message RepairContentReq {
-    string data = 4;
-}
-
-message RepairContentResp {
-    
-}
-
-message LanguageChangeReq {
-    string data = 1;
-}
-
-message LanguageChangeResp {
-    
-}
-
-message CheckGameInstalledReq {
-    string offerId = 1;
-}
-
-message CheckGameInstalledResp {
-    
-}
-
 message ReloadEntitlementsReq {
     uint32 trigger = 1;
     bool forceRefreshExternalEntitlements = 2;
@@ -469,42 +303,6 @@ message ReloadEntitlementsReq {
 }
 
 message ReloadEntitlementsResp {
-    
-}
-
-message GetInstallQueueReq {
-    
-}
-
-message GetInstallQueueResp {
-    
-}
-
-message TrialTimeUpdatedReq {
-    OfferKey offerKey = 1;
-    string contentId = 2;
-    int64 remainingMinutes = 3;
-    bool gameExited = 4;
-}
-
-message TrialTimeUpdatedResp {
-    
-}
-
-message NotifyGameRunStatusReq {
-    GameRunStatus gameRunStatus = 1;
-}
-
-message NotifyGameRunStatusResp {
-    
-}
-
-message NotifyChangeSplashVisibilityReq {
-    uint32 type = 1;
-    uint32 reason = 2;
-}
-
-message NotifyChangeSplashVisibilityResp {
     
 }
 
@@ -568,40 +366,12 @@ message GepReadyNotif {
     uint32 gameErrorCode = 4;
 }
 
-message ContentReadyNotif {
-    
-}
-
-message ContentUpdatedNotif {
-    uint32 partIndex = 1;
-    uint32 contentLength = 2;
-    repeated OfferKey offerKeys = 3;
-    string serializedContent = 4;
-}
-
-message InstallUpdatedNotif {
-    reserved 1, 2, 3;
-}
-
-message BaseGameUpdatedNotif {
-    reserved 1;
-}
-
 message GameStartedSuspendedNotif {
     GameRunStatus gameRunStatus = 3;
 }
 
 message GameResumedNotif {
     GameRunStatus gameRunStatus = 1;
-}
-
-message ChangeSplashVisibilityNotif {
-    uint32 type = 1;
-    uint32 reason = 2;
-}
-
-message InstallQueueUpdatedNotif {
-    string data = 2;
 }
 
 message UpdaterDownloadProgNotif {
@@ -618,38 +388,8 @@ message UpdateNotif {
     UpdateInformation updateInfo = 1;
 }
 
-message ModifyContentProgressNotif {
-    reserved 1, 2, 5, 6, 7, 9;
-}
-
-message InsertDiskNotif {
-    string offerId = 1;
-    string slug = 2;
-    uint32 diskNo = 3;
-}
-
 message TelemetryEventNotif {
     string data = 9;
-}
-
-message DownloadStatusNotif {
-    repeated DownloadStatusInfo downloadStatus = 1;
-    message DownloadStatusInfo {
-        string offerId = 1;
-        string slug = 2;
-        int32 downloadStatus = 3;
-    }
-}
-
-message DownloadStateCleanedNotif {
-    string offerId = 1;
-}
-
-message InstallCompletedNotif {
-    string offerId = 1;
-    bool groupFinished = 2;
-    bool groupHasBaseGame = 3;
-    bool shouldLaunchGame = 4;
 }
 
 message ModifyContentErrorData {
@@ -680,43 +420,8 @@ message ModifyContentErrorData {
     }
 }
 
-message InstallErrorOccurredNotif {
-    OfferKey offerKey = 1;
-    string slug = 2;
-    uint32 errorCategory = 3;
-    uint32 errorCode = 4;
-    string extraContext = 5;
-    string errorDetail = 6;
-    ModifyContentErrorData errorData = 7;
-}
-
-message GeneralErrorMessageNotif {
-    string errorMsg = 1;
-}
-
-message ShowErrorDialogNotif {
-    uint32 errorCode = 1;
-    string additionalContexts = 2;
-}
-
-message ClearInstallFinishListReq {
-    
-}
-
-message ClearInstallFinishListResp {
-    
-}
-
 message FocusMainWindowNotif {
     
-}
-
-message CheckAuthViewVisibilityNotif {
-    
-}
-
-message InstallQueueReadinessNotif {
-    bool ready = 1;
 }
 
 message AuthInfoUpdateNotif {
@@ -770,14 +475,7 @@ message ExternalAction {
     string protocolUrl = 18;
     uint32 thirdPartyPresence = 19;
     bool isLauncherElevated = 20;
-}
-
-message PushExternalActionReq {
-    ExternalAction externalAction = 1;
-}
-
-message PushExternalActionResp {
-    
+    bool shutdownAfter = 21;
 }
 
 message PopExternalActionReq {
@@ -789,56 +487,6 @@ message PopExternalActionResp {
 }
 
 message ExternalActionNotif {
-    
-}
-
-message CancelInstallGameReq {
-    string slug = 1;
-    ExternalUserInfo userInfo = 2;
-    RequestData requestData = 3;
-}
-
-message CancelInstallGameResp {
-    
-}
-
-message InstallGameReq {
-    ExternalUserInfo userInfo = 1;
-    string gameSlug = 2;
-    RequestData requestData = 3;
-}
-
-message InstallGameResp {
-    
-}
-
-message PauseInstallGameReq {
-    string slug = 1;
-    ExternalUserInfo userInfo = 2;
-    RequestData requestData = 3;
-}
-
-message PauseInstallGameResp {
-    
-}
-
-message ResumeInstallGameReq {
-    string slug = 1;
-    ExternalUserInfo userInfo = 2;
-    RequestData requestData = 3;
-}
-
-message ResumeInstallGameResp {
-    
-}
-
-message UninstallGameReq {
-    ExternalUserInfo userInfo = 1;
-    string slug = 2;
-    RequestData requestData = 3;
-}
-
-message UninstallGameResp {
     
 }
 
@@ -862,25 +510,6 @@ message LaunchGameReq {
 
 message LaunchGameResp {
     bool requestAccepted = 1;
-}
-
-message LaunchClientReq {
-    ExternalUserInfo userInfo = 1;
-    string slug = 2;
-    RequestData requestData = 3;
-}
-
-message LaunchClientResp {
-    
-}
-
-message ContentUninstallStatusNotif {
-    string offerId = 1;
-    uint32 uninstallState = 2;
-}
-
-message ContentUninstallStatusNotifResp {
-    
 }
 
 message GrantAchievementNotif {
@@ -985,10 +614,6 @@ message GameLaunchPending {
     RequestData requestData = 2;
 }
 
-message GameLaunchPendingResp {
-    
-}
-
 message Link2EAReq {
     ExternalUserInfo userInfo = 1;
     string externalAppId = 2;
@@ -1032,17 +657,6 @@ message ProfilerControlReq {
 
 message ProfilerControlResp {
     
-}
-
-message RefreshExtEntitlementsNotif {
-    string responseBody = 1;
-    uint32 responseStatus = 2;
-    int32 entitlementLoadTrigger = 3;
-}
-
-message LoadEntitlementsFailedNotif {
-    int32 errorCategory = 1;
-    int32 entitlementLoadTrigger = 2;
 }
 
 message LaunchAppReq {
