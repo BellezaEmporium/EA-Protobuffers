@@ -1,3 +1,3 @@
 requests
-protobuf==3.20.3
+protobuf
 pbtk

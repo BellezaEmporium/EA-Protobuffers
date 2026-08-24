@@ -21,6 +21,7 @@ message Response {
 
 message StreamMessage {
     google.protobuf.Any streamData = 1;
+    repeated string streamUrls = 2;
 }
 
 message BinaryMessage {
