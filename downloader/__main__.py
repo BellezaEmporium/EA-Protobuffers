@@ -8,7 +8,7 @@ import sys
 
 # logging.basicConfig(level=logging.DEBUG)
 
-WHITELISTED_EXES = ["EABackgroundService", "EAConnect_microsoft", "EADesktop", "EAEgsProxy", "EAGEP", "EALaunchHelper", "EALocalHostSvc", "EASteamProxy", "EAUpdater", "Link2EA"]
+WHITELISTED_EXES = ["EABackgroundService", "EAConnect_microsoft", "EADesktop", "EAEgsProxy", "EAGEP", "EALaunchHelper", "EALocalHostSvc", "EASteamLauncher", "EASteamProxy", "EAUpdater", "Link2EA"]
 
 AUTOPATCH_BUCKET = 'https://autopatch.juno.ea.com/autopatch/upgrade/buckets/999'
 
