@@ -212,16 +212,6 @@ message VerifyDetectedBundlesReq {
     repeated DetectedBundle detectedBundles = 1;
 }
 
-message ReloadEntitlementsReq {
-    uint32 trigger = 1;
-    bool forceRefreshExternalEntitlements = 2;
-    string contentId = 3;
-}
-
-message ReloadEntitlementsResp {
-    
-}
-
 message UpdaterDownloadProgNotif {
     int64 bytesReceived = 1;
     int64 bytesTotal = 2;
@@ -324,38 +314,6 @@ message GetEpicAccessTokenReq {
 message GetEpicAccessTokenResp {
     string accessToken = 1;
     uint64 expiresAtS = 2;
-}
-
-message SteamOverlayToStoreNotif {
-    string appId = 1;
-    string offerId = 2;
-    bool isBaseGame = 3;
-    uint32 flag = 4;
-}
-
-message SteamPurchaseConfirmationReq {
-    uint64 orderId = 1;
-    bool isAuthorized = 2;
-}
-
-message SteamPurchaseConfirmationResp {
-    
-}
-
-message SetSteamLocaleReq {
-    string locale = 1;
-}
-
-message SetSteamLocaleResp {
-    
-}
-
-message NotifySteamOverlayStateReq {
-    bool isActive = 1;
-}
-
-message NotifySteamOverlayStateResp {
-    
 }
 
 message GameLaunchPending {

@@ -35,3 +35,19 @@ message SubscriptionInfo {
 message GetSubscriptionsResp {
     repeated SubscriptionInfo infos = 1;
 }
+
+message PipeRegisterClient {
+    string clientName = 1;
+    repeated string subscriptionPlanUrls = 2;
+}
+
+message PipeEnvelope {
+    uint64 requestId = 1;
+    
+    oneof payload {
+        PipeRegisterClient registerClient = 2;
+        Request request = 3;
+        Response response = 4;
+        StreamMessage notification = 5;
+    }
+}
